@@ -27,7 +27,7 @@ def load_and_chunk_pdf(pdf_path: str,chunk_size: int =1000,chunk_overlap: int = 
         separators=["\n\n","\n","."," ",""]
     )
     chunks=splitter.split_documents(raw_pages)
-
+    chunks=[c for c in chunks if len(c.page_content.strip()) > 100] # Filter out very short chunks
     print(f"PDF: {path.name}")
     print(f"Pages loaded: {len(raw_pages)}")
     print(f"Chunks created: {len(chunks)}")
